@@ -157,6 +157,32 @@ files = [
 ]
 
 [[package]]
+name = "pytelegrambotapi"
+version = "4.15.5"
+description = "Python Telegram bot api."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "pytelegrambotapi-4.15.5-py3-none-any.whl", hash = "sha256:507a6702b28d9327f22952f7b8b41a3bb5ffb0a47e11f167f5a7fae14dc121ab"},
+    {file = "pytelegrambotapi-4.15.5.tar.gz", hash = "sha256:1a68707840fd4cf45d670a63fea39d6818b153faed76fe4cb6dec78cd6772fdd"},
+]
+
+[package.dependencies]
+requests = "*"
+
+[package.extras]
+aiohttp = ["aiohttp"]
+aioredis = ["aioredis"]
+coloredlogs = ["coloredlogs"]
+fastapi = ["fastapi"]
+json = ["ujson"]
+pil = ["pillow"]
+psutil = ["psutil"]
+redis = ["redis (>=3.4.1)"]
+uvicorn = ["uvicorn"]
+watchdog = ["watchdog"]
+
+[[package]]
 name = "requests"
 version = "2.31.0"
 description = "Python HTTP for Humans."
@@ -208,4 +234,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "743a48ace825e632fbd59ba244398416c85baabad287a9f3626e96d165079c65"
+content-hash = "bb7b5cdd251317242cad1a6ffc157685ccc816c7ae4bb2e8a11fafe8aef20693"

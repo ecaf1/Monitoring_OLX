@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.12"
 requests = "^2.31.0"
 bs4 = "^0.0.2"
+pytelegrambotapi = "^4.15.5"
 
 
 [build-system]
