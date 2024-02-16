@@ -1,10 +1,10 @@
+import json
 import time
-from urllib import response
 
-import requests
+import requests  # cloudscrap
 from bs4 import BeautifulSoup
 
-olx_url = "https://www.olx.com.br/brasil?q=caloi+estrada&sf=1&opst=2"
+olx_url = "https://www.olx.com.br/brasil"
 
 novos_anuncios = set()
 intervalo_verificacao = 3600
@@ -43,5 +43,19 @@ def main():
 
 
 if __name__ == "__main__":
-    print(novos_anuncios)
-    main()
+    # print(novos_anuncios)
+    # main()
+    sessao = requests.Session()
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+    }
+    payload = {"q": "caloi%20estradacle"}
+    response = sessao.get(olx_url, headers=headers)
+    print(response.request.headers)
+    soup = BeautifulSoup(response.text, "html.parser")
+    resu = soup.find(id="__NEXT_DATA__")
+    with open("resu.html", "w", encoding="utf-8") as f:
+        f.write(soup.prettify())
+    data = json.loads(getattr(resu, "text"))
+    with open("resu.json", "w") as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
