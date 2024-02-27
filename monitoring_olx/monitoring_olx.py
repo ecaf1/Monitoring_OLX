@@ -1,17 +1,20 @@
 import json
 import time
-from math import e
-from urllib.parse import quote
 
-import requests  # cloudscrap
+import requests
 from bs4 import BeautifulSoup
 
 OLX_URL = "https://www.olx.com.br/"
-HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
-}
+
 novos_anuncios = set()
 intervalo_verificacao = 3600
+
+sesion = requests.Session()
+sesion.headers.update(
+    {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+    }
+)
 
 
 def get_ad_data(produvt, stare_key="brasil/"):
@@ -24,7 +27,7 @@ def get_ad_data(produvt, stare_key="brasil/"):
 
     params = {"q": produvt}
     try:
-        response = requests.get(url, params=params, headers=HEADERS)
+        response = sesion.get(url, params=params)
         response.raise_for_status()
         soup = BeautifulSoup(response.text, "html.parser")
         ads_gloss = soup.find(id="__NEXT_DATA__")
@@ -43,8 +46,9 @@ def get_ad_data(produvt, stare_key="brasil/"):
     return my_ads
 
 
-def verificar_novos_anuncios():
-    ...
+def verificar_novos_anuncios(): ...
+
+
 #     global novos_anuncios
 #     print("Verificando novos anuncio...")
 #     links_anuncios = obter_links_anuncios(OLX_URL)
